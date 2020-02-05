@@ -9,13 +9,15 @@ export default class Column extends Component {
       <div className="column">
         <h1 className="column__title">{this.props.title}</h1>
         <div className="column__container">
-          {this.props.tasks.map((task, index) => {
-            return (
-              <div key={task.id}>
-                <Task task={task} index={index} toggleTask={this.props.toggleTask} editTask={this.props.editTask} deleteTask={this.props.deleteTask} />
-              </div>
-            )
-          })}
+          {this.props.tasks.length === 0 && this.props.title === "Todo" ? <p>Add a new task!</p> :
+            this.props.tasks.map((task, index) => {
+              return (
+                <div key={task.id}>
+                  <Task task={task} index={index} toggleTask={this.props.toggleTask} editTask={this.props.editTask} deleteTask={this.props.deleteTask} />
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     )

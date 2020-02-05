@@ -13,27 +13,12 @@ export default class Todo extends Component {
       date: new Date(),
     },
     data: {
-      tasks: {
-        dummy1: {
-          id: 'dummy1',
-          content: 'do laundry 1',
-          description: 'testing 1',
-          date: new Date(),
-          done: false
-        },
-        dummy2: {
-          id: 'dummy2',
-          content: 'do laundry 2',
-          description: 'testing 2',
-          date: new Date(),
-          done: false
-        },
-      },
+      tasks: {},
       columns: {
         todo: {
           id: '1',
           title: 'Todo',
-          taskIds: ['dummy1', 'dummy2']
+          taskIds: []
         },
         done: {
           id: '2',
