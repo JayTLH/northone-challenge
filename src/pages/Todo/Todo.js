@@ -26,7 +26,7 @@ export default class Todo extends Component {
           content: 'do laundry 2',
           description: 'testing 2',
           date: new Date(),
-          done:false
+          done: false
         },
       },
       columns: {
@@ -153,7 +153,25 @@ export default class Todo extends Component {
   }
 
   editTask = (e) => {
-    console.log(e.target)
+    e.preventDefault()
+
+    let newState = {
+      ...this.state,
+      data: {
+        ...this.state.data,
+        tasks: {
+          ...this.state.data.tasks,
+          [e.target.taskId.value]: {
+            ...this.state.data.tasks[e.target.taskId.value],
+            content: e.target.content.value,
+            description: e.target.description.value,
+            date: new Date(e.target.dateTime.value)
+          }
+        }
+      }
+    }
+
+    this.setState(newState)
   }
 
   deleteTask = (e) => {

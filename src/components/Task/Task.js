@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./Task.scss";
 
+import Modal from '../Modal/Modal'
+
 export default class Task extends Component {
   getDateStr = () => {
     let date = this.props.task.date
@@ -31,7 +33,7 @@ export default class Task extends Component {
             <button className="task__button task__button--done" value={this.props.task.id} onClick={this.props.toggleTask}></button>
             : <button className="task__button task__button--redo" value={this.props.task.id} onClick={this.props.toggleTask}></button>
           }
-          <button className="task__button task__button--edit" value={this.props.task.id} onClick={this.props.editTask}></button>
+          <Modal task={this.props.task} editTask={this.props.editTask} />
           <button className="task__button task__button--delete" value={this.props.task.id} onClick={this.props.deleteTask}></button>
         </div>
       </div>

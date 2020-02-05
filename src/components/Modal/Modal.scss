@@ -1,0 +1,58 @@
+.modal {
+  &__body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-right: "-50%";
+    transform: translate(-50%, -50%);
+    padding: 48px 50px 48px 50px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__form {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0 0 21px 0
+  }
+
+  &__input {
+    width: 350px;
+  }
+
+  &__input-area {
+    width: 350px;
+    height: 70px;
+    font-family: inherit;
+    resize: none;
+  }
+
+  &__button {
+    width: 80px;
+  }
+
+  &__id-hidden {
+    display: none;
+  }
+}
