@@ -157,7 +157,38 @@ export default class Todo extends Component {
   }
 
   deleteTask = (e) => {
-    console.log(e.target)
+    let todoCopy = this.state.data.columns.todo.taskIds.slice()
+    let doneCopy = this.state.data.columns.done.taskIds.slice()
+
+    if (!this.state.data.tasks[e.target.value].done) {
+      let taskIndex = this.state.data.columns.todo.taskIds.findIndex(id => id === e.target.value)
+      todoCopy.splice(taskIndex, 1)
+    } else {
+      let taskIndex = this.state.data.columns.done.taskIds.findIndex(id => id === e.target.value)
+      doneCopy.splice(taskIndex, 1)
+    }
+
+    delete this.state.data.tasks[e.target.value]
+
+    let newState = {
+      ...this.state,
+      data: {
+        ...this.state.data,
+        columns: {
+          ...this.state.data.columns,
+          todo: {
+            ...this.state.data.columns.todo,
+            taskIds: todoCopy
+          },
+          done: {
+            ...this.state.data.columns.done,
+            taskIds: doneCopy
+          }
+        }
+      }
+    }
+
+    this.setState(newState)
   }
 
   render() {
