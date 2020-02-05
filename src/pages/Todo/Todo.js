@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import DateTimePicker from 'react-datetime-picker'
+import nanoid from 'nanoid'
 import './Todo.scss'
+
+import Column from '../../components/Column/Column'
 
 export default class Todo extends Component {
   state = {
@@ -8,6 +11,35 @@ export default class Todo extends Component {
       content: '',
       description: '',
       date: new Date()
+    },
+    data: {
+      tasks: {
+        dummy1: {
+          id: nanoid(),
+          content: 'do laundry 1',
+          description: 'testing 1',
+          date: new Date()
+        },
+        dummy2: {
+          id: nanoid(),
+          content: 'do laundry 2',
+          description: 'testing 2',
+          date: new Date()
+        },
+      },
+      columns: {
+        todo: {
+          id: '1',
+          title: 'Todo',
+          taskIds: ['dummy1', 'dummy2']
+        },
+        done: {
+          id: '2',
+          title: 'Done',
+          taskIds: []
+        }
+      },
+      columnOrder: ['todo', 'done']
     }
   }
 
@@ -60,6 +92,15 @@ export default class Todo extends Component {
           </form>
         </div>
 
+        {this.state.data.columnOrder.map(columnTitle => {
+          let column = this.state.data.columns[columnTitle];
+          let tasks = column.taskIds.map(taskId => this.state.data.tasks[taskId])
+          return (
+            <div key={column.id}>
+              <Column title={column.title} tasks={tasks} />
+            </div>
+          )
+        })}
       </div>
     )
   }
