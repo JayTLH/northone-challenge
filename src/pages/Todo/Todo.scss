@@ -1,0 +1,34 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-task {
+  &__form {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__input {
+    width: 350px;
+  }
+
+  &__input-area {
+    width: 350px;
+    height: 70px;
+    font-family: inherit;
+    resize: none;
+  }
+
+  &__button {
+    width: 80px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background: rgb(231, 231, 231);
+  }
+}
