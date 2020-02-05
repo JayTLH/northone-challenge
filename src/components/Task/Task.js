@@ -20,12 +20,20 @@ export default class Task extends Component {
 
   render() {
     return (
-      <div className="task">
+      <div className={`task ${this.props.task.done ? "incomplete" : null}`}>
         <div className="task__text">
           <p className="task__content">{this.props.task.content}</p>
           <p className="task__description">{this.props.task.description}</p>
         </div>
         <p className="task__date">{this.getDateStr()}</p>
+        <div className="task__container">
+          {!this.props.task.done ?
+            <button className="task__button task__button--done" value={this.props.task.id} onClick={this.props.toggleTask}></button>
+            : <button className="task__button task__button--redo" value={this.props.task.id} onClick={this.props.toggleTask}></button>
+          }
+          <button className="task__button task__button--edit" value={this.props.task.id} onClick={this.props.editTask}></button>
+          <button className="task__button task__button--delete" value={this.props.task.id} onClick={this.props.deleteTask}></button>
+        </div>
       </div>
     )
   }

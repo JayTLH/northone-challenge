@@ -15,4 +15,38 @@
   &__date {
     width: 90px;
   }
+
+  &__container {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+
+    &--done {
+      background: no-repeat center/100% url('../../images/checkmark.svg')
+    }
+
+    &--redo {
+      background: no-repeat center/100% url('../../images/redo.svg')
+    }
+
+    &--edit {
+      background: no-repeat center/100% url('../../images/edit.svg')
+    }
+
+    &--delete {
+      background: no-repeat center/100% url('../../images/bin.svg')
+    }
+  }
+}
+
+.incomplete {
+  background: rgb(187, 187, 187);
 }

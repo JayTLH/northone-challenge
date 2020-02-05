@@ -10,21 +10,23 @@ export default class Todo extends Component {
     taskInfo: {
       content: '',
       description: '',
-      date: new Date()
+      date: new Date(),
     },
     data: {
       tasks: {
         dummy1: {
-          id: nanoid(),
+          id: 'dummy1',
           content: 'do laundry 1',
           description: 'testing 1',
-          date: new Date()
+          date: new Date(),
+          done: false
         },
         dummy2: {
-          id: nanoid(),
+          id: 'dummy2',
           content: 'do laundry 2',
           description: 'testing 2',
-          date: new Date()
+          date: new Date(),
+          done:false
         },
       },
       columns: {
@@ -107,6 +109,57 @@ export default class Todo extends Component {
     this.setState(newState)
   }
 
+  // moves tasks between lists
+  toggleTask = (e) => {
+    let todoCopy = this.state.data.columns.todo.taskIds.slice()
+    let doneCopy = this.state.data.columns.done.taskIds.slice()
+
+    if (!this.state.data.tasks[e.target.value].done) {
+      let taskIndex = this.state.data.columns.todo.taskIds.findIndex(id => id === e.target.value)
+      todoCopy.splice(taskIndex, 1)
+      doneCopy.push(e.target.value)
+    } else {
+      let taskIndex = this.state.data.columns.done.taskIds.findIndex(id => id === e.target.value)
+      doneCopy.splice(taskIndex, 1)
+      todoCopy.push(e.target.value)
+    }
+
+    let newState = {
+      ...this.state,
+      data: {
+        ...this.state.data,
+        tasks: {
+          ...this.state.data.tasks,
+          [e.target.value]: {
+            ...this.state.data.tasks[e.target.value],
+            done: !this.state.data.tasks[e.target.value].done
+          }
+        },
+        columns: {
+          ...this.state.data.columns,
+          todo: {
+            ...this.state.data.columns.todo,
+            taskIds: todoCopy
+          },
+          done: {
+            ...this.state.data.columns.done,
+            taskIds: doneCopy
+          }
+        }
+      }
+    }
+
+    this.setState(newState)
+  }
+
+  editTask = (e) => {
+    console.log(e.target)
+  }
+
+  deleteTask = (e) => {
+    console.log(e.target)
+  }
+
   render() {
     return (
       <div className="todo">
@@ -132,7 +185,7 @@ export default class Todo extends Component {
           let tasks = column.taskIds.map(taskId => this.state.data.tasks[taskId])
           return (
             <div key={column.id}>
-              <Column title={column.title} tasks={tasks} />
+              <Column title={column.title} tasks={tasks} toggleTask={this.toggleTask} editTask={this.editTask} deleteTask={this.deleteTask} />
             </div>
           )
         })}

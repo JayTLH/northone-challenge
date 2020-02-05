@@ -12,7 +12,7 @@ export default class Column extends Component {
           {this.props.tasks.map((task, index) => {
             return (
               <div key={task.id}>
-                <Task task={task} index={index} />
+                <Task task={task} index={index} toggleTask={this.props.toggleTask} editTask={this.props.editTask} deleteTask={this.props.deleteTask} />
               </div>
             )
           })}
