@@ -69,6 +69,42 @@ export default class Todo extends Component {
 
   newTask = (e) => {
     e.preventDefault()
+    let newId = nanoid()
+    let newState = {
+      ...this.state,
+      taskInfo: {
+        content: '',
+        description: '',
+        date: new Date(),
+        done: false
+      },
+      data: {
+        ...this.state.data,
+        tasks: {
+          ...this.state.data.tasks,
+          [newId]: {
+            id: newId,
+            content: this.state.taskInfo.content,
+            description: this.state.taskInfo.description,
+            date: this.state.taskInfo.date,
+            done: false
+          }
+        },
+        columns: {
+          ...this.state.data.columns,
+          todo: {
+            ...this.state.data.columns.todo,
+            taskIds: [
+              ...this.state.data.columns.todo.taskIds,
+              newId
+            ]
+          }
+        }
+      }
+    }
+
+    e.target.reset()
+    this.setState(newState)
   }
 
   render() {
@@ -85,7 +121,6 @@ export default class Todo extends Component {
               <DateTimePicker
                 onChange={this.changeDate}
                 value={this.state.taskInfo.date}
-                minDate={new Date()}
               />
             </div>
             <button className="new-task__button">Add</button>
